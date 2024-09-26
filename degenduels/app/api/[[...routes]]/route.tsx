@@ -1,10 +1,10 @@
 /** @jsxImportSource frog/jsx */
 
 import { Button, Frog } from 'frog'
-//import { devtools } from 'frog/dev'
+import { devtools } from 'frog/dev'
 import { neynar } from 'frog/middlewares'
 import { handle } from 'frog/next'
-//import { serveStatic } from 'frog/serve-static'
+import { serveStatic } from 'frog/serve-static'
 import { readFile } from 'fs/promises'
 
 import { duelApp } from './duel'
@@ -113,10 +113,8 @@ app.frame('/check', async (c) => {
 })
 
 app.image('/balance', async (c) => {
-  const { fid, username, verifications } = c.var.interactor || {}
+  const { fid } = c.var.interactor || {}
   const fidNew = fid ? fid : 1;
-  const usernameNew = username ? String(username) : 'test';
-  const walletsNew = verifications ? String(verifications[0]) : '0x';
   const User = await getUser(fidNew);
 
   const points = User.points;
@@ -180,7 +178,7 @@ app.image('/balance', async (c) => {
 
 app.route('/duels', duelApp)
 
-//devtools(app, { serveStatic })
+devtools(app, { serveStatic })
 
 export const GET = handle(app)
 export const POST = handle(app)
