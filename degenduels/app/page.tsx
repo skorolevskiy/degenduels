@@ -6,7 +6,7 @@ import styles from './page.module.css'
 
 export async function generateMetadata(): Promise<Metadata> {
   const frameTags = await getFrameMetadata(
-    `${process.env.VERCEL_URL || 'http://localhost:3000'}/api`,
+    `${process.env.SITE_URL || 'http://localhost:3000'}/api`,
   )
   return {
     other: frameTags,
@@ -21,7 +21,7 @@ export default function Home() {
           <p>
             Head to{' '}
             <a
-              href="/api/dev"
+              href="/api"
               style={{ display: 'inline', fontWeight: 'semibold' }}
             >
               <code className={styles.code}>localhost:3000/api</code>
