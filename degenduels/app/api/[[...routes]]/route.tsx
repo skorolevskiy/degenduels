@@ -14,7 +14,7 @@ import { addUser, getUser, updatePoints } from './types'
 const app = new Frog({
   assetsPath: '/',
   basePath: '/api',
-  browserLocation: '/:path',
+  //browserLocation: '/:path',
   title: "Degen Duels Game",
 })
 .use(
