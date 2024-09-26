@@ -44,10 +44,7 @@ app.frame('/', (c) => {
 })
 
 app.frame('/general', async (c) => {
-  const { status } = c
   const { fid, username, verifications } = c.var.interactor || {}
-  const { author } = c.var.cast || {}
-
   const fidNew = fid ? fid : 1;
   const usernameNew = username ? String(username) : 'test';
   const walletsNew = verifications ? String(verifications[0]) : '0x';
@@ -121,11 +118,6 @@ app.image('/balance', async (c) => {
   const usernameNew = username ? String(username) : 'test';
   const walletsNew = verifications ? String(verifications[0]) : '0x';
   const User = await getUser(fidNew);
-
-  if (!User) {
-    //console.warn('not added: ' + JSON.stringify(User));
-    await addUser(fidNew, usernameNew, walletsNew);
-  }
 
   const points = User.points;
   const localFont = await readFile('./public/fonts/Orbitron-SemiBold.ttf');

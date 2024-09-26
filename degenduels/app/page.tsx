@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {/* <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <p>
             Head to{' '}
             <a
@@ -28,7 +28,7 @@ export default function Home() {
             </a>{' '}
             for your frame endpoint.
           </p>
-        </div>
+        </div> */}
         <div>
           <a
             href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
