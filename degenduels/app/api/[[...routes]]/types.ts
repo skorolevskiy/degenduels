@@ -1,6 +1,5 @@
 import * as kysely from 'kysely'
 import { createKysely } from '@vercel/postgres-kysely'
-import { Chicle } from 'next/font/google'
 
 export interface PlayersTable {
 	id: kysely.Generated<number>
