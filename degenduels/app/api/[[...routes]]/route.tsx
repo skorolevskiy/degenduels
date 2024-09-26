@@ -12,9 +12,6 @@ import { NEYNAR_API_KEY } from '@/app/config'
 const neynarKey = NEYNAR_API_KEY ? NEYNAR_API_KEY.toString() : ""
 import { addUser, getUser } from './types'
 const app = new Frog({
-  assetsPath: '/',
-  basePath: '/api',
-  browserLocation: '/:path',
   title: "Degen Duels Game",
 })
 .use(
