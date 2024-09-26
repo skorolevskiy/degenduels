@@ -10,11 +10,11 @@ import { readFile } from 'fs/promises'
 import { duelApp } from './duel'
 import { NEYNAR_API_KEY } from '@/app/config'
 const neynarKey = NEYNAR_API_KEY ? NEYNAR_API_KEY.toString() : ""
-import { addUser, getUser, updatePoints } from './types'
+import { addUser, getUser } from './types'
 const app = new Frog({
   assetsPath: '/',
   basePath: '/api',
-  //browserLocation: '/:path',
+  browserLocation: '/:path',
   title: "Degen Duels Game",
 })
 .use(
@@ -22,7 +22,7 @@ const app = new Frog({
 )
 
 // Uncomment to use Edge Runtime
-//export const runtime = 'edge'
+export const runtime = 'edge'
 
 const IMAGE = {
   GENERAL: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/Start.png',
