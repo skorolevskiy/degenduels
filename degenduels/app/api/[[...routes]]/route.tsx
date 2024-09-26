@@ -5,7 +5,7 @@ import { devtools } from 'frog/dev'
 import { neynar } from 'frog/middlewares'
 import { handle } from 'frog/next'
 import { serveStatic } from 'frog/serve-static'
-import { readFile } from 'fs/promises'
+//import { readFile } from 'fs/promises'
 
 import { duelApp } from './duel'
 import { NEYNAR_API_KEY } from '@/app/config'
@@ -22,7 +22,7 @@ const app = new Frog({
 )
 
 // Uncomment to use Edge Runtime
-export const runtime = 'edge';
+//export const runtime = 'edge';
 
 const IMAGE = {
   GENERAL: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/Start.png',
@@ -120,7 +120,7 @@ app.image('/balance', async (c) => {
   const User = await getUser(fidNew);
 
   const points = User.points;
-  const localFont = await readFile('./public/fonts/Orbitron-SemiBold.ttf');
+  //const localFont = await readFile('./public/fonts/Orbitron-SemiBold.ttf');
   return c.res({
     headers: {
       'Cache-Control': 'max-age=0'
@@ -167,12 +167,12 @@ app.image('/balance', async (c) => {
   imageOptions: { 
     width: 720,
     height: 720,
-    fonts: [
-      {
-        name: 'Geist',
-        data: localFont,
-      },
-    ],
+    // fonts: [
+    //   {
+    //     name: 'Geist',
+    //     data: localFont,
+    //   },
+    // ],
   },
 
   })

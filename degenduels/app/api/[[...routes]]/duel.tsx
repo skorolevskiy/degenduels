@@ -7,7 +7,7 @@ import { NEYNAR_API_KEY, SITE_URL } from '@/app/config'
 const neynarKey = NEYNAR_API_KEY ? NEYNAR_API_KEY.toString() : "";
 import { updateDuel, updatePoints, getUser } from './types';
 let spins: number, date: string, points: string, buttonText: string;
-import { readFile } from 'fs/promises'
+//import { readFile } from 'fs/promises';
  
 export const duelApp = new Frog({
   title: 'Degen Duels Game',
@@ -110,7 +110,7 @@ duelApp.frame('/wait/:user', async (c) => {
 })
 
 duelApp.image('/waiting', async (c) => {
-    const localFont = await readFile('./public/fonts/Orbitron-SemiBold.ttf');
+    //const localFont = await readFile('./public/fonts/Orbitron-SemiBold.ttf');
     return c.res({
         image: (
             <div style={{ fontFamily: 'Geist, Inter, "Material Icons"',
@@ -127,14 +127,14 @@ duelApp.image('/waiting', async (c) => {
             </div>
           ),
         imageOptions: { 
-        width: 720,
-        height: 720,
-        fonts: [
-            {
-            name: 'Geist',
-            data: localFont,
-            },
-        ],
+            width: 720,
+            height: 720,
+            // fonts: [
+            //     {
+            //     name: 'Geist',
+            //     data: localFont,
+            //     },
+            // ],
         },
     })
 });
