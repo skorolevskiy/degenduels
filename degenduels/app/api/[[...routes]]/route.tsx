@@ -1,11 +1,11 @@
 /** @jsxImportSource frog/jsx */
 
 import { Button, Frog } from 'frog'
-import { devtools } from 'frog/dev'
+//import { devtools } from 'frog/dev'
 import { neynar } from 'frog/middlewares'
 import { handle } from 'frog/next'
-import { serveStatic } from 'frog/serve-static'
-//import { readFile } from 'fs/promises'
+//import { serveStatic } from 'frog/serve-static'
+import { readFile } from 'fs/promises'
 
 import { duelApp } from './duel'
 import { NEYNAR_API_KEY } from '@/app/config'
@@ -180,7 +180,7 @@ app.image('/balance', async (c) => {
 
 app.route('/duels', duelApp)
 
-devtools(app, { serveStatic })
+//devtools(app, { serveStatic })
 
 export const GET = handle(app)
 export const POST = handle(app)
