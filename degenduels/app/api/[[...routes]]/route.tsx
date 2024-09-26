@@ -44,17 +44,17 @@ app.frame('/', (c) => {
 })
 
 app.frame('/general', async (c) => {
-  const { fid, username, verifications } = c.var.interactor || {}
-  const fidNew = fid ? fid : 1;
-  const usernameNew = username ? String(username) : 'test';
-  const walletsNew = verifications ? String(verifications[0]) : '0x';
+  // const { fid, username, verifications } = c.var.interactor || {}
+  // const fidNew = fid ? fid : 1;
+  // const usernameNew = username ? String(username) : 'test';
+  // const walletsNew = verifications ? String(verifications[0]) : '0x';
 
-  const User = await getUser(fidNew);
+  // const User = await getUser(fidNew);
 
-  if (!User) {
-    //console.warn('not added: ' + JSON.stringify(User));
-    await addUser(fidNew, usernameNew, walletsNew);
-  }
+  // if (!User) {
+  //   //console.warn('not added: ' + JSON.stringify(User));
+  //   await addUser(fidNew, usernameNew, walletsNew);
+  // }
 
   return c.res({
     image: IMAGE.GENERAL,
