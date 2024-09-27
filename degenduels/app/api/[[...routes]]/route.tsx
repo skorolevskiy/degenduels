@@ -7,7 +7,7 @@ import { handle } from 'frog/next'
 import { serveStatic } from 'frog/serve-static'
 import { readFile } from 'fs/promises'
 
-import { duelApp } from './duel'
+//import { duelApp } from './duel'
 import { NEYNAR_API_KEY } from '@/app/config'
 const neynarKey = NEYNAR_API_KEY ? NEYNAR_API_KEY.toString() : ""
 import { addUser, getUser } from './types'
@@ -99,9 +99,9 @@ app.frame('/check', async (c) => {
   }
   return c.res({
     image: image,
-    headers: {
-      'Cache-Control': 'max-age=0'
-    },
+    // headers: {
+    //   'Cache-Control': 'max-age=0'
+    // },
     imageAspectRatio: '1:1',
 
     intents: [
@@ -175,7 +175,7 @@ app.image('/balance', async (c) => {
   })
 })
 
-app.route('/duels', duelApp)
+//app.route('/duels', duelApp)
 
 devtools(app, { serveStatic })
 
