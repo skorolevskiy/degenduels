@@ -7,7 +7,7 @@ import { handle } from 'frog/next'
 import { serveStatic } from 'frog/serve-static'
 import { readFile } from 'fs/promises'
 
-//import { duelApp } from './duel'
+import { duelApp } from './duel'
 import { NEYNAR_API_KEY } from '@/app/config'
 const neynarKey = NEYNAR_API_KEY ? NEYNAR_API_KEY.toString() : ""
 import { addUser, getUser } from './types'
@@ -32,7 +32,7 @@ const IMAGE = {
   LOW_BALANCE: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/Balance-not-enough.png',
 };
 
-app.frame('/', (c) => {
+app.frame('/', async (c) => {
   return c.res({
     image: IMAGE.GENERAL,
     imageAspectRatio: '1:1',
@@ -117,7 +117,7 @@ app.image('/balance', async (c) => {
   const User = await getUser(fidNew);
 
   const points = User.points;
-  //const localFont = await readFile('./public/fonts/Orbitron-SemiBold.ttf');
+  const localFont = await readFile('./public/fonts/Orbitron-SemiBold.ttf');
   return c.res({
     headers: {
       'Cache-Control': 'max-age=0'
@@ -164,18 +164,18 @@ app.image('/balance', async (c) => {
   imageOptions: { 
     width: 720,
     height: 720,
-    // fonts: [
-    //   {
-    //     name: 'Geist',
-    //     data: localFont,
-    //   },
-    // ],
+    fonts: [
+      {
+        name: 'Geist',
+        data: localFont,
+      },
+    ],
   },
 
   })
 })
 
-//app.route('/duels', duelApp)
+app.route('/duels', duelApp)
 
 devtools(app, { serveStatic })
 
