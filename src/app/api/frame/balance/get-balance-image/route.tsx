@@ -1,7 +1,8 @@
 import { SITE_URL } from '@/config';
 import { ImageResponse } from 'next/og';
+import { getUser } from '../../types';
 
-let fid: string | null, username: string, points: string | null;
+let fid: number | null, username: string, points: number | null, wins: number, loses: number;
 
 export async function GET(request: Request) {
 	const fontData = await fetch(
@@ -12,10 +13,18 @@ export async function GET(request: Request) {
 		const { searchParams } = new URL(request.url);
 
 		const hasFid = searchParams.has('fid');
-		fid = hasFid ? searchParams.get('fid') : null;
+		fid = hasFid ? Number(searchParams.get('fid')) : null;
 
 		const hasPoints = searchParams.has('points');
-		points = hasPoints ? searchParams.get('points') : null;
+		points = hasPoints ? Number(searchParams.get('points')) : null;
+
+		const User = await getUser(fid);
+
+		if (!User) {
+		} else {
+			wins = User.totalWin;
+			loses = User.totalLose;
+		}
 
 		return new ImageResponse(
 			(
@@ -44,7 +53,9 @@ export async function GET(request: Request) {
 					}}
 				>
 					<span>Balance: {points} $DUEL </span>
-					<span>Fid: {fid} </span>
+					<span>Wins: {wins} </span>
+					<span>Loses: {loses} </span>
+					<span>Win Rate: {wins/loses} </span>
 				</div>
 
 				<div
