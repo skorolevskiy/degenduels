@@ -1,6 +1,5 @@
 import { SITE_URL } from '@/config';
 import { ImageResponse } from 'next/og';
-import { getUser } from '../../types';
 
 let fid: number | null, username: string, points: number;
 
