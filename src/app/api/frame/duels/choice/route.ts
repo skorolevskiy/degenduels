@@ -6,7 +6,7 @@ import { updatePoints, getUser } from '../../types';
 // const transport = http(process.env.RPC_URL);
 
 export const dynamic = 'force-dynamic';
-let spins: number, date: string, points: number, inputData: { untrustedData?: { inputText?: string } };
+let spins: number, date: string, points: number, inputText: string | undefined;
 
 export async function POST(req: NextRequest): Promise<Response> {
 	try {
@@ -20,7 +20,9 @@ export async function POST(req: NextRequest): Promise<Response> {
 			throw new Error('Invalid frame request');
 		}
 
-		inputData = await req.json();
+		const inputData: { untrustedData?: { inputText?: string } } = await req.json();
+
+		inputText = inputData.untrustedData?.inputText;
 
 		return getResponse(ResponseType.SUCCESS);
 	} catch (error) {
@@ -58,7 +60,7 @@ function getResponse(type: ResponseType) {
 	<meta name="fc:frame:button:3:action" content="post" />
 	<meta name="fc:frame:button:3:target" content="${SITE_URL}/api/frame/duels/fire" />
 
-	<meta name="fc:frame:button:4" content="${inputData}" />
+	<meta name="fc:frame:button:4" content="${inputText}" />
 	<meta name="fc:frame:button:4:action" content="post" />
 	<meta name="fc:frame:button:4:target" content="${SITE_URL}/api/frame/duels/" />
 		
