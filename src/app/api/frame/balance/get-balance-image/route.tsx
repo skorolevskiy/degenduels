@@ -12,7 +12,7 @@ export async function GET(request: Request) {
 		const { searchParams } = new URL(request.url);
 
 		const hasFid = searchParams.has('fid');
-		fid = hasFid ? Number(searchParams.get('fid')) : null;
+		fid = hasFid ? Number(searchParams.get('fid')) : 1;
 
 		const hasPoints = searchParams.has('points');
 		points = hasPoints ? Number(searchParams.get('points')) : 0;
