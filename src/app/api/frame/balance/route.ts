@@ -17,7 +17,7 @@ export async function POST(req: NextRequest): Promise<Response> {
 			throw new Error('Invalid frame request');
 		}
 
-		fid = status?.action?.interactor?.fid ? status.action.interactor.fid : null;
+		fid = status?.action?.interactor?.fid ? status.action.interactor.fid : 1;
 
 		time = Math.floor(Date.now() / 1000);
 
