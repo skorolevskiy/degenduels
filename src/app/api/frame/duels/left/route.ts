@@ -1,6 +1,6 @@
 import { SITE_URL, NEYNAR_API_KEY } from '@/config';
 import { NextRequest, NextResponse } from 'next/server';
-import { updatePointsSpins, updatePoints, updateDate, getUser } from '../../types';
+import { updatePoints, getUser } from '../../types';
 
 // const HAS_KV = !!process.env.KV_URL;
 // const transport = http(process.env.RPC_URL);
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest): Promise<Response> {
 			throw new Error('Invalid frame request');
 		}
 
-		const fid = status?.action?.interactor?.fid ? JSON.stringify(status.action.interactor.fid) : null;
+		const fid = status?.action?.interactor?.fid ? status.action.interactor.fid : null;
 
 		const User = await getUser(fid);
 
@@ -33,40 +33,40 @@ export async function POST(req: NextRequest): Promise<Response> {
 
 		const randomNumber = getRandomNumber();
 
-		if (spins > 0) {
-			switch (randomNumber) {
-				case 1:
-					await updatePointsSpins(fid, 100);
-					console.warn('+100');
-					return getResponse(ResponseType.IMAGE_100);
-				case 2:
-					await updatePointsSpins(fid, 250);
-					console.warn('+250');
-					return getResponse(ResponseType.IMAGE_250);
-				case 3:
-					await updatePointsSpins(fid, 500);
-					console.warn('+500');
-					return getResponse(ResponseType.IMAGE_500);
-				case 4:
-					await updatePointsSpins(fid, 1000);
-					console.warn('+1000');
-					return getResponse(ResponseType.IMAGE_1000);
-				case 5:
-					await updatePointsSpins(fid, 3000);
-					console.warn('+3000');
-					return getResponse(ResponseType.IMAGE_3000);
-				case 6:
-					await updatePointsSpins(fid, 5000);
-					console.warn('+5000');
-					return getResponse(ResponseType.IMAGE_5000);
-				case 7:
-					await updatePointsSpins(fid, 10000);
-					console.warn('+10000');
-					return getResponse(ResponseType.IMAGE_10000);
-			}
-		} else {
-			return getResponse(ResponseType.SPIN_OUT);
-		}
+		// if (spins > 0) {
+		// 	switch (randomNumber) {
+		// 		case 1:
+		// 			await updatePointsSpins(fid, 100);
+		// 			console.warn('+100');
+		// 			return getResponse(ResponseType.IMAGE_100);
+		// 		case 2:
+		// 			await updatePointsSpins(fid, 250);
+		// 			console.warn('+250');
+		// 			return getResponse(ResponseType.IMAGE_250);
+		// 		case 3:
+		// 			await updatePointsSpins(fid, 500);
+		// 			console.warn('+500');
+		// 			return getResponse(ResponseType.IMAGE_500);
+		// 		case 4:
+		// 			await updatePointsSpins(fid, 1000);
+		// 			console.warn('+1000');
+		// 			return getResponse(ResponseType.IMAGE_1000);
+		// 		case 5:
+		// 			await updatePointsSpins(fid, 3000);
+		// 			console.warn('+3000');
+		// 			return getResponse(ResponseType.IMAGE_3000);
+		// 		case 6:
+		// 			await updatePointsSpins(fid, 5000);
+		// 			console.warn('+5000');
+		// 			return getResponse(ResponseType.IMAGE_5000);
+		// 		case 7:
+		// 			await updatePointsSpins(fid, 10000);
+		// 			console.warn('+10000');
+		// 			return getResponse(ResponseType.IMAGE_10000);
+		// 	}
+		// } else {
+		// 	return getResponse(ResponseType.SPIN_OUT);
+		// }
 
 		return getResponse(ResponseType.SPIN_OUT);
 		// Check if user has minted before
