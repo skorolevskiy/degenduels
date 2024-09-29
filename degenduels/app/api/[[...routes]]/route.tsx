@@ -9,7 +9,7 @@ import { readFile } from 'fs/promises'
 
 import { NEYNAR_API_KEY, SITE_URL } from '@/app/config'
 const neynarKey = NEYNAR_API_KEY ? NEYNAR_API_KEY.toString() : ""
-import { addUser, getUser, updateDuel, updatePoints } from './types'
+//import { addUser, getUser, updateDuel, updatePoints } from './types'
 const app = new Frog({
   basePath: '/api',
   browserLocation: '/:path',
@@ -47,12 +47,12 @@ app.frame('/general', async (c) => {
   const usernameNew = username ? String(username) : 'test';
   const walletsNew = verifications ? String(verifications[0]) : '0x';
 
-  const User = await getUser(fidNew);
+  // const User = await getUser(fidNew);
 
-  if (!User) {
-    //console.warn('not added: ' + JSON.stringify(User));
-    await addUser(fidNew, usernameNew, walletsNew);
-  }
+  // if (!User) {
+  //   //console.warn('not added: ' + JSON.stringify(User));
+  //   await addUser(fidNew, usernameNew, walletsNew);
+  // }
 
   return c.res({
     image: IMAGE.GENERAL,
@@ -84,20 +84,20 @@ app.frame('/check', async (c) => {
   const { fid } = c.var.interactor || {};
   const fidNew = fid ? fid : 1;
   let image:string, points:number;
-  const User = await getUser(fidNew);
+  // const User = await getUser(fidNew);
 
-  if (!User) {
-      image = IMAGE.ERROR;
-  } else {
-      points = User.points;
-      if (points >= 100) {
-          image = '/balance?time=' + time;
-      } else {
-          image = IMAGE.LOW_BALANCE;
-      }
-  }
+  // if (!User) {
+  //     image = IMAGE.ERROR;
+  // } else {
+  //     points = User.points;
+  //     if (points >= 100) {
+  //         image = '/balance?time=' + time;
+  //     } else {
+  //         image = IMAGE.LOW_BALANCE;
+  //     }
+  // }
   return c.res({
-    image: image,
+    image: IMAGE.ERROR,
     // headers: {
     //   'Cache-Control': 'max-age=0'
     // },
@@ -113,9 +113,9 @@ app.frame('/check', async (c) => {
 app.image('/balance', async (c) => {
   const { fid } = c.var.interactor || {}
   const fidNew = fid ? fid : 1;
-  const User = await getUser(fidNew);
+  // const User = await getUser(fidNew);
 
-  const points = User.points;
+  // const points = User.points;
   const localFont = await readFile('./public/fonts/Orbitron-SemiBold.ttf');
   return c.res({
     headers: {
@@ -145,7 +145,7 @@ app.image('/balance', async (c) => {
               textAlign: 'center',
 						}}
 					>
-						Balance: {points} $DUEL 
+						Balance: points $DUEL 
 					</div>
 
           <div
@@ -196,21 +196,21 @@ app.frame('/duels', async (c) => {
   const { fid } = c.var.interactor || {};
   const fidNew = fid ? fid : 1;
   let image:string, points:number;
-  const User = await getUser(fidNew);
+  // const User = await getUser(fidNew);
 
-  if (!User) {
-      image = IMAGE.ERROR;
-  } else {
-      points = User.points;
-      if (points >= 100) {
-          image = IMAGEDUEL.CHOICE;
-      } else {
-          image = IMAGEDUEL.LOW_BALANCE;
-      }
-  }
+  // if (!User) {
+  //     image = IMAGE.ERROR;
+  // } else {
+  //     points = User.points;
+  //     if (points >= 100) {
+  //         image = IMAGEDUEL.CHOICE;
+  //     } else {
+  //         image = IMAGEDUEL.LOW_BALANCE;
+  //     }
+  // }
 
   return c.res({
-      image: image,
+      image: IMAGE.ERROR,
       imageAspectRatio: '1:1',
       intents: [
           <Button action="/friend">Friend</Button>,
@@ -310,30 +310,30 @@ app.frame('/result/:user', async (c) => {
       case "water": {
           if (rand == 0) {
               imageChoice = IMAGEDUEL.WATER_FIRE_WIN;
-              await updateDuel(fidNew, 0, true, 0);
+              //await updateDuel(fidNew, 0, true, 0);
           } else {
               imageChoice = IMAGEDUEL.WATER_WIND_LOSE;
-              await updateDuel(fidNew, -100, false, 0);
+              //await updateDuel(fidNew, -100, false, 0);
           }
           break
       }
       case "wind": {
           if (rand == 0) {
               imageChoice = IMAGEDUEL.WIND_WATER_WIN;
-              await updateDuel(fidNew, 0, true, 1);
+              //await updateDuel(fidNew, 0, true, 1);
           } else {
               imageChoice = IMAGEDUEL.WIND_FIRE_LOSE;
-              await updateDuel(fidNew, -100, false, 1);
+              //await updateDuel(fidNew, -100, false, 1);
           }
           break
       }
       case "fire": {
           if (rand == 0) {
               imageChoice = IMAGEDUEL.FIRE_WIND_WIN;
-              await updateDuel(fidNew, 0, true, 2);
+              //await updateDuel(fidNew, 0, true, 2);
           } else {
               imageChoice = IMAGEDUEL.FIRE_WATER_LOSE;
-              await updateDuel(fidNew, -100, false, 2);
+              //await updateDuel(fidNew, -100, false, 2);
           }
           break
       }
@@ -387,7 +387,7 @@ app.frame('/recast/:user', async (c) => {
   let text = "I%20fight%20with%20you%20%40" + user + "%20in%20%2Fdegenduels%20game.%0ABack%20to%20game%20to%20end%20fight.";
   recast = "https://warpcast.com/~/compose?text=" + text + "&embeds[]=" + SITE_URL + "/";
 
-  await updatePoints(fidNew, 100);
+  //await updatePoints(fidNew, 100);
 
   return c.res({
       image: imageChoice,
