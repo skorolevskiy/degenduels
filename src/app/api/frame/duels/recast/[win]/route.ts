@@ -1,15 +1,15 @@
 import { SITE_URL, NEYNAR_API_KEY } from '@/config';
 import { NextRequest, NextResponse } from 'next/server';
-import { updatePoints, getUser } from '../../types';
-
-// const HAS_KV = !!process.env.KV_URL;
-// const transport = http(process.env.RPC_URL);
+import { updatePoints, getUser } from '../../../types';
 
 export const dynamic = 'force-dynamic';
-let spins: number, date: string, points: number, buttonText: string, recast: string | undefined;
+let spins: number, date: string, points: number, buttonText: string, recast: string | undefined, getId: string | null;
 
 export async function POST(req: NextRequest): Promise<Response> {
 	try {
+		const { searchParams } = new URL(req.url);
+  		const id = searchParams.get('id');
+		getId = id;
 		const data = await req.json();
 		const body: { trustedData?: { messageBytes?: string } } = data;
 
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest): Promise<Response> {
 		let text = "I%20fight%20with%20you%20%40" + user + "%20in%20%2Fdegenduels%20game.%0ABack%20to%20game%20to%20end%20fight.";
   		recast = "https://warpcast.com/~/compose?text=" + text + "&embeds[]=" + SITE_URL + "/";
 
-		return getResponse(ResponseType.WATER_FIRE_WIN);
+		return getResponse(ResponseType.RECEIVE);
 
 	} catch (error) {
 		console.error(error);
@@ -48,8 +48,8 @@ export async function POST(req: NextRequest): Promise<Response> {
 
 enum ResponseType {
 	SUCCESS,
-	WATER_FIRE_WIN,
-	WATER_WIND_LOSE,
+	RECEIVE,
+	REMATCH,
 	ERROR,
 	SPIN_OUT
 }
@@ -57,8 +57,8 @@ enum ResponseType {
 function getResponse(type: ResponseType) {
 	const IMAGE = {
 		[ResponseType.SUCCESS]: 'https://gateway.lighthouse.storage/ipfs/QmNY7ESQtnHdFre4NAxH869MWL536mng8yhtMvRomsikfa/GREERING%20RAZ%201.png',
-		[ResponseType.WATER_FIRE_WIN]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/water-fire-won.gif',
-		[ResponseType.WATER_WIND_LOSE]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/wind-water-lose.gif',
+		[ResponseType.REMATCH]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/rematch.gif',
+		[ResponseType.RECEIVE]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/received.gif',
 		[ResponseType.ERROR]: 'https://gateway.lighthouse.storage/ipfs/bafybeiborpipie6brxzofzgaf5eswp53pctxhu335etzbjyvax46pfvpwa/error.jpg',
 		[ResponseType.SPIN_OUT]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/Balance-not-enough.png'
 	}[type];
@@ -84,8 +84,12 @@ function getResponse(type: ResponseType) {
 		<meta name="fc:frame:button:1:target" content="${SITE_URL}/api/frame/duels/" />
 
 		<meta name="fc:frame:button:2" content="Make cast" />
-		<meta name="fc:frame:button:2:action" content="post" />
+		<meta name="fc:frame:button:2:action" content="link" />
 		<meta name="fc:frame:button:2:target" content="${recast}" />
+
+		<meta name="fc:frame:button:3" content="${getId}" />
+		<meta name="fc:frame:button:3:action" content="link" />
+		<meta name="fc:frame:button:3:target" content="${recast}" />
 		`
 	}
 

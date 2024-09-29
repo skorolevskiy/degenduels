@@ -6,7 +6,7 @@ import { updatePoints, getUser } from '../../types';
 // const transport = http(process.env.RPC_URL);
 
 export const dynamic = 'force-dynamic';
-let spins: number, date: string, points: number, buttonText: string, inputText: string | undefined;
+let spins: number, date: string, points: number, buttonText: string, inputText: string | undefined, win: string;
 
 export async function POST(req: NextRequest): Promise<Response> {
 	try {
@@ -32,6 +32,7 @@ export async function POST(req: NextRequest): Promise<Response> {
 		// }
 
 		buttonText = "Get Rewards";
+		win = "win";
 
 		return getResponse(ResponseType.WIND_WATER_WIN);
 
@@ -76,7 +77,7 @@ function getResponse(type: ResponseType) {
 		`
     	<meta name="fc:frame:button:1" content="${buttonText}" />
 		<meta name="fc:frame:button:1:action" content="post" />
-		<meta name="fc:frame:button:1:target" content="${SITE_URL}/api/frame/duels/recast/" />
+		<meta name="fc:frame:button:1:target" content="${SITE_URL}/api/frame/duels/recast/${win}" />
 
 		<meta name="fc:frame:button:2" content="Skip" />
 		<meta name="fc:frame:button:2:action" content="post" />

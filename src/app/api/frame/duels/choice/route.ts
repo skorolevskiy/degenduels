@@ -2,9 +2,6 @@ import { SITE_URL, NEYNAR_API_KEY } from '@/config';
 import { NextRequest, NextResponse } from 'next/server';
 import { updatePoints, getUser } from '../../types';
 
-// const HAS_KV = !!process.env.KV_URL;
-// const transport = http(process.env.RPC_URL);
-
 export const dynamic = 'force-dynamic';
 let spins: number, date: string, points: number, inputText: string | undefined;
 
