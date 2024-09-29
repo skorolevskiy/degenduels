@@ -22,12 +22,12 @@ export async function POST(req: NextRequest): Promise<Response> {
 
 		const rand = Math.floor(Math.random() * 2);
 		if (rand == 0) {
-			await updateDuel(fid, 0, true, 1);
+			await updateDuel(fid, 0, 1, 0, 0, 0, 1);
 			win = "win";
 			buttonText = "Get Rewards";
 			return getResponse(ResponseType.WIND_WATER_WIN);
 		} else {
-			await updateDuel(fid, -100, false, 1);
+			await updateDuel(fid, -100, 0, 1, 0, 0, 1);
 			win = "lose";
 			buttonText = "Rematch";
 			return getResponse(ResponseType.WIND_FIRE_LOSE);
