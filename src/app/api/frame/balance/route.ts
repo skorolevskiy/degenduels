@@ -54,7 +54,7 @@ function getResponse(type: ResponseType) {
 		[ResponseType.SUCCESS]: 'https://gateway.lighthouse.storage/ipfs/QmaS8bbwz79CWfJEfJ44JEu4PA7QkR563koCqSdgPED6Jp/success.webp',
 		[ResponseType.NO_ADDRESS]: 'https://gateway.lighthouse.storage/ipfs/QmaS8bbwz79CWfJEfJ44JEu4PA7QkR563koCqSdgPED6Jp/no-address.png',
 		[ResponseType.ERROR]: 'https://gateway.lighthouse.storage/ipfs/bafybeiborpipie6brxzofzgaf5eswp53pctxhu335etzbjyvax46pfvpwa/error.jpg',
-		[ResponseType.BALANCE]: SITE_URL + '/api/frame/balance/get-balance-image?fid='+ fid +'points='+ points +'&time='+ time,
+		[ResponseType.BALANCE]: SITE_URL + '/api/frame/balance/get-balance-image?fid='+ fid +'&points='+ points +'&time='+ time,
 		[ResponseType.SPIN_OUT]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/Balance-not-enough.png'
 	}[type];
 	// const shouldRetry =
