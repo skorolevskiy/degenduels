@@ -10,7 +10,8 @@ let spins: number, date: string, points: number, inputText: string | undefined;
 
 export async function POST(req: NextRequest): Promise<Response> {
 	try {
-		const body: { trustedData?: { messageBytes?: string } } = await req.json();
+		const data = await req.json();
+		const body: { trustedData?: { messageBytes?: string } } = data;
 
 		// Check if frame request is valid
 		const status = await validateFrameRequest(body.trustedData?.messageBytes);
@@ -20,7 +21,7 @@ export async function POST(req: NextRequest): Promise<Response> {
 			throw new Error('Invalid frame request');
 		}
 
-		const inputData: { untrustedData?: { inputText?: string } } = await req.json();
+		const inputData: { untrustedData?: { inputText?: string } } = data;
 
 		inputText = inputData.untrustedData?.inputText;
 
