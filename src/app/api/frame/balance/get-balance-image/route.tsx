@@ -38,6 +38,7 @@ export async function GET(request: Request) {
 				<div
 					style={{
 						display: 'flex',
+						flexDirection: 'column',
 						fontSize: 48,
 						textAlign: 'center',
 					}}
