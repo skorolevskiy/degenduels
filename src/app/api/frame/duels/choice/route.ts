@@ -59,12 +59,7 @@ function getResponse(type: ResponseType) {
 
 	<meta name="fc:frame:button:3" content="Fire" />
 	<meta name="fc:frame:button:3:action" content="post" />
-	<meta name="fc:frame:button:3:target" content="${SITE_URL}/api/frame/duels/fire" />
-
-	<meta name="fc:frame:button:4" content="${inputText}" />
-	<meta name="fc:frame:button:4:action" content="post" />
-	<meta name="fc:frame:button:4:target" content="${SITE_URL}/api/frame/duels/" />
-		
+	<meta name="fc:frame:button:3:target" content="${SITE_URL}/api/frame/duels/fire" />		
 
   </head></html>`);
 }
