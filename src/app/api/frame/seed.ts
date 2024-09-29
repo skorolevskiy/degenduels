@@ -1,6 +1,8 @@
+import { sql } from '@vercel/postgres'
+
 export async function seed() {
-    const createTable = await `
-      CREATE TABLE IF NOT EXISTS players (
+  const createTable = await sql`
+    CREATE TABLE IF NOT EXISTS players (
         id SERIAL PRIMARY KEY,
         fid INTEGER NOT NULL,
         username VARCHAR(255) UNIQUE NOT NULL,
@@ -14,11 +16,11 @@ export async function seed() {
         "choiceWind" INTEGER,
         "choiceFire" INTEGER,
       );
-      `
-  
-    console.log(`Created "users" table`)
-  
-    return {
-      createTable,
-    }
+    `
+
+  console.log(`Created "users" table`)
+
+  return {
+    createTable,
   }
+}
