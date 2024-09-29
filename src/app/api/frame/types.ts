@@ -71,19 +71,28 @@ export async function addUser(fid: number | null, username: string | null, walle
 }
 
 export async function updateDuel(fid: number | null, points: number, win: boolean, choice: number) {
-	let duelWin:number, duelLose:number, choiceFire:number, choiceWater:number, choiceWind:number = 0;
+	let duelWin:number, duelLose:number, choiceFire:number, choiceWater:number, choiceWind:number;
 	if (win) {
 		duelWin = 1;
+		duelLose = 0;
 	} else {
 		duelLose = 1;
+		duelWin = 0;
 	}
 	if (choice == 0) {
 		choiceWater = 1;
+		choiceWind = 0;
+		choiceFire = 0;
 	} else if (choice == 1) {
 		choiceWind = 1;
+		choiceWater = 0;
+		choiceFire = 0;
 	} else if (choice == 2) {
 		choiceFire = 1;
+		choiceWater = 0;
+		choiceWind = 0;
 	}
+
 	await db
 		.updateTable('players')
 		.set((eb) => ({
