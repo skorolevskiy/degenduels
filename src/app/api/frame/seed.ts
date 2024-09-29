@@ -15,6 +15,7 @@ export async function seed() {
         "choiceWater" INTEGER,
         "choiceWind" INTEGER,
         "choiceFire" INTEGER,
+        "lastFriend" VARCHAR(255),
       );
     `
 

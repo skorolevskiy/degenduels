@@ -12,6 +12,7 @@ export interface PlayersTable {
 	choiceWater: number
 	choiceWind: number
 	choiceFire: number
+	lastFriend: string
 	createdAt: kysely.ColumnType<Date, Date | undefined, never>
 	wallet: string | null
 }
@@ -64,6 +65,7 @@ export async function addUser(fid: number | null, username: string | null, walle
 			choiceWind: 0,
 			choiceFire: 0,
             wallet: wallet,
+			lastFriend: "random"
 		})
 		.executeTakeFirst()
 }
@@ -102,6 +104,16 @@ export async function updatePoints(fid: number | null, points: number) {
 		.updateTable('players')
 		.set((eb) => ({
 			points: eb('points', '+', points),
+		}))
+		.where('fid', '=', fid)
+		.execute()
+}
+
+export async function updateFriend(fid: number | null, lastFriend: string) {
+	await db
+		.updateTable('players')
+		.set((eb) => ({
+			lastFriend: lastFriend ? lastFriend : '',
 		}))
 		.where('fid', '=', fid)
 		.execute()

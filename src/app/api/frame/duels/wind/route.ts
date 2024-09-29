@@ -1,9 +1,6 @@
 import { SITE_URL, NEYNAR_API_KEY } from '@/config';
 import { NextRequest, NextResponse } from 'next/server';
-import { updatePoints, getUser } from '../../types';
-
-// const HAS_KV = !!process.env.KV_URL;
-// const transport = http(process.env.RPC_URL);
+import { updateDuel, getUser } from '../../types';
 
 export const dynamic = 'force-dynamic';
 let spins: number, date: string, points: number, buttonText: string, inputText: string | undefined, win: string;
@@ -21,20 +18,20 @@ export async function POST(req: NextRequest): Promise<Response> {
 			throw new Error('Invalid frame request');
 		}
 
-		// const fid = status?.action?.interactor?.fid ? status.action.interactor.fid : null;
+		const fid = status?.action?.interactor?.fid ? status.action.interactor.fid : null;
 
-		// const User = await getUser(fid);
-
-		// if (!User) {
-		// 	spins = 0;
-		// } else {
-		// 	points = User.points;
-		// }
-
-		buttonText = "Get Rewards";
-		win = "win";
-
-		return getResponse(ResponseType.WIND_WATER_WIN);
+		const rand = Math.floor(Math.random() * 2);
+		if (rand == 0) {
+			await updateDuel(fid, 0, true, 1);
+			win = "win";
+			buttonText = "Get Rewards";
+			return getResponse(ResponseType.WIND_WATER_WIN);
+		} else {
+			await updateDuel(fid, -100, false, 1);
+			win = "lose";
+			buttonText = "Rematch";
+			return getResponse(ResponseType.WIND_FIRE_LOSE);
+		}
 
 	} catch (error) {
 		console.error(error);

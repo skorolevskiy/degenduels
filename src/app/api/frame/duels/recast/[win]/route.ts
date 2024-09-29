@@ -3,13 +3,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { updatePoints, getUser } from '../../../types';
 
 export const dynamic = 'force-dynamic';
-let spins: number, date: string, points: number, buttonText: string, recast: string | undefined, getId: string | undefined;
+let spins: number, date: string, points: number, buttonText: string, recast: string | undefined, getParam: string | undefined;
 
 export async function POST(req: NextRequest): Promise<Response> {
 	try {
-		const { searchParams } = new URL(req.url);
-  		const id = req.nextUrl.pathname.split('/').pop();
-		getId = id;
+		getParam = req.nextUrl.pathname.split('/').pop();
+
 		const data = await req.json();
 		const body: { trustedData?: { messageBytes?: string } } = data;
 
@@ -21,24 +20,20 @@ export async function POST(req: NextRequest): Promise<Response> {
 			throw new Error('Invalid frame request');
 		}
 
-		// const fid = status?.action?.interactor?.fid ? status.action.interactor.fid : null;
-
-		// const User = await getUser(fid);
-
-		// if (!User) {
-		// 	spins = 0;
-		// } else {
-		// 	points = User.points;
-		// }
-
-		buttonText = "Fight again";
-
+		const fid = status?.action?.interactor?.fid ? status.action.interactor.fid : null;
 		let user = "random";
-
 		let text = "I%20fight%20with%20you%20%40" + user + "%20in%20%2Fdegenduels%20game.%0ABack%20to%20game%20to%20end%20fight.";
   		recast = "https://warpcast.com/~/compose?text=" + text + "&embeds[]=" + SITE_URL + "/";
 
-		return getResponse(ResponseType.RECEIVE);
+		await updatePoints(fid, 100);
+
+		if (getParam == "win") {
+			buttonText = "Fight again";
+			return getResponse(ResponseType.RECEIVE);
+		} else {
+			buttonText = "Rematch";
+			return getResponse(ResponseType.REMATCH);
+		}
 
 	} catch (error) {
 		console.error(error);
@@ -86,10 +81,6 @@ function getResponse(type: ResponseType) {
 		<meta name="fc:frame:button:2" content="Make cast" />
 		<meta name="fc:frame:button:2:action" content="link" />
 		<meta name="fc:frame:button:2:target" content="${recast}" />
-
-		<meta name="fc:frame:button:3" content="${getId}" />
-		<meta name="fc:frame:button:3:action" content="link" />
-		<meta name="fc:frame:button:3:target" content="${recast}" />
 		`
 	}
 

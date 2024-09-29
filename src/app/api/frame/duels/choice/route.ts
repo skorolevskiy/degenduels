@@ -1,9 +1,9 @@
 import { SITE_URL, NEYNAR_API_KEY } from '@/config';
 import { NextRequest, NextResponse } from 'next/server';
-import { updatePoints, getUser } from '../../types';
+import { updateFriend, getUser } from '../../types';
 
 export const dynamic = 'force-dynamic';
-let spins: number, date: string, points: number, inputText: string | undefined;
+let fid: number, date: string, points: number, inputText: string | undefined;
 
 export async function POST(req: NextRequest): Promise<Response> {
 	try {
@@ -19,10 +19,14 @@ export async function POST(req: NextRequest): Promise<Response> {
 		}
 
 		const inputData: { untrustedData?: { inputText?: string } } = data;
-		inputText = inputData.untrustedData?.inputText;
+		inputText = inputData.untrustedData?.inputText ? inputData.untrustedData?.inputText : 'random';
+
+		fid = status?.action?.interactor?.fid ? status.action.interactor.fid : 1;
 
 		if (inputText === "") {
 			return getResponse(ResponseType.ERROR);
+		} else {
+			await updateFriend(fid, inputText);
 		}
 
 		return getResponse(ResponseType.SUCCESS);
