@@ -1,7 +1,7 @@
 import { SITE_URL } from '@/config';
 import { ImageResponse } from 'next/og';
 
-let fid: number | null, username: string, points: number;
+let fid: string | null, username: string, points: string | null;
 
 export async function GET(request: Request) {
 	const fontData = await fetch(
@@ -12,10 +12,10 @@ export async function GET(request: Request) {
 		const { searchParams } = new URL(request.url);
 
 		const hasFid = searchParams.has('fid');
-		fid = hasFid ? Number(searchParams.get('fid')) : 1;
+		fid = hasFid ? searchParams.get('fid') : null;
 
 		const hasPoints = searchParams.has('points');
-		points = hasPoints ? Number(searchParams.get('points')) : 0;
+		points = hasPoints ? searchParams.get('points') : null;
 
 		return new ImageResponse(
 			(
