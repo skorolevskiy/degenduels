@@ -8,7 +8,7 @@ let spins: number, date: string, points: number, buttonText: string, recast: str
 export async function POST(req: NextRequest): Promise<Response> {
 	try {
 		const { searchParams } = new URL(req.url);
-  		const id = searchParams.get('id');
+  		const id = searchParams.get('win');
 		getId = id;
 		const data = await req.json();
 		const body: { trustedData?: { messageBytes?: string } } = data;
