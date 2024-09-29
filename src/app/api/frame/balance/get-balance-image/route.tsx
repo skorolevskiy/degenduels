@@ -42,7 +42,8 @@ export async function GET(request: Request) {
 						textAlign: 'center',
 					}}
 				>
-					Balance: {points} $DUEL 
+					<span>Balance: {points} $DUEL </span>
+					<span>Fid: {fid} </span>
 				</div>
 
 				<div
