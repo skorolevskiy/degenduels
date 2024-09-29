@@ -50,7 +50,7 @@ function getResponse(type: ResponseType) {
 
 	<meta name="fc:frame:button:1" content="Enter Duel" />
 	<meta name="fc:frame:button:1:action" content="post" />
-	<meta name="fc:frame:button:1:target" content="${SITE_URL}/api/frame/choice/" />
+	<meta name="fc:frame:button:1:target" content="${SITE_URL}/api/frame/duels/choice/" />
 	
 	<meta name="fc:frame:button:2" content="Back" />
 	<meta name="fc:frame:button:2:action" content="post" />
