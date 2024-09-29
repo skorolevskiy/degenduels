@@ -3,12 +3,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { updatePoints, getUser } from '../../../types';
 
 export const dynamic = 'force-dynamic';
-let spins: number, date: string, points: number, buttonText: string, recast: string | undefined, getId: string | null;
+let spins: number, date: string, points: number, buttonText: string, recast: string | undefined, getId: string | undefined;
 
 export async function POST(req: NextRequest): Promise<Response> {
 	try {
 		const { searchParams } = new URL(req.url);
-  		const id = searchParams.get('win');
+  		const id = req.nextUrl.pathname.split('/').pop();
 		getId = id;
 		const data = await req.json();
 		const body: { trustedData?: { messageBytes?: string } } = data;
