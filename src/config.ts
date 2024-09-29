@@ -1,6 +1,6 @@
 import { getFrameMetadata, FrameImageMetadata } from '@coinbase/onchainkit/frame';
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
+export const SITE_URL = process.env.SITE_URL;
 
 export const NEYNAR_API_KEY = process.env.NEYNAR_API_KEY;
 
