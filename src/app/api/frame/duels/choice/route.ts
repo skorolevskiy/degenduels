@@ -22,8 +22,11 @@ export async function POST(req: NextRequest): Promise<Response> {
 		}
 
 		const inputData: { untrustedData?: { inputText?: string } } = data;
-
 		inputText = inputData.untrustedData?.inputText;
+
+		if (inputText === "") {
+			return getResponse(ResponseType.ERROR);
+		}
 
 		return getResponse(ResponseType.SUCCESS);
 	} catch (error) {

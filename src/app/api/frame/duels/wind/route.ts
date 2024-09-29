@@ -33,7 +33,7 @@ export async function POST(req: NextRequest): Promise<Response> {
 
 		buttonText = "Get Rewards";
 
-		return getResponse(ResponseType.WATER_FIRE_WIN);
+		return getResponse(ResponseType.WIND_WATER_WIN);
 
 	} catch (error) {
 		console.error(error);
@@ -43,8 +43,8 @@ export async function POST(req: NextRequest): Promise<Response> {
 
 enum ResponseType {
 	SUCCESS,
-	WATER_FIRE_WIN,
-	WATER_WIND_LOSE,
+	WIND_WATER_WIN,
+	WIND_FIRE_LOSE,
 	ERROR,
 	SPIN_OUT
 }
@@ -52,8 +52,8 @@ enum ResponseType {
 function getResponse(type: ResponseType) {
 	const IMAGE = {
 		[ResponseType.SUCCESS]: 'https://gateway.lighthouse.storage/ipfs/QmNY7ESQtnHdFre4NAxH869MWL536mng8yhtMvRomsikfa/GREERING%20RAZ%201.png',
-		[ResponseType.WATER_FIRE_WIN]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/water-fire-won.gif',
-		[ResponseType.WATER_WIND_LOSE]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/wind-water-lose.gif',
+		[ResponseType.WIND_WATER_WIN]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/wind-water-won.gif',
+		[ResponseType.WIND_FIRE_LOSE]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/wind-fire-lose.gif',
 		[ResponseType.ERROR]: 'https://gateway.lighthouse.storage/ipfs/bafybeiborpipie6brxzofzgaf5eswp53pctxhu335etzbjyvax46pfvpwa/error.jpg',
 		[ResponseType.SPIN_OUT]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/Balance-not-enough.png'
 	}[type];
