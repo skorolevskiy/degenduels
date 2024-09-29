@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { updatePoints, getUser } from '../../../types';
 
 export const dynamic = 'force-dynamic';
-let spins: number, date: string, points: number, buttonText: string, recast: string | undefined, getParam: string | undefined;
+let spins: number, date: string, points: number, buttonText: string, recast: string | undefined, getParam: string | undefined, user: string;
 
 export async function POST(req: NextRequest): Promise<Response> {
 	try {
@@ -21,7 +21,15 @@ export async function POST(req: NextRequest): Promise<Response> {
 		}
 
 		const fid = status?.action?.interactor?.fid ? status.action.interactor.fid : null;
-		let user = "random";
+		const User = await getUser(fid);
+
+		if (!User) {
+		} else {
+			user = User.lastFriend;
+			if (user === "random") {
+				user = "eat";
+			}
+		}
 		let text = "I%20fight%20with%20you%20%40" + user + "%20in%20%2Fdegenduels%20game.%0ABack%20to%20game%20to%20end%20fight.";
   		recast = "https://warpcast.com/~/compose?text=" + text + "&embeds[]=" + SITE_URL + "/";
 
