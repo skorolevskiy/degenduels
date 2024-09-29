@@ -34,7 +34,7 @@ export async function POST(req: NextRequest): Promise<Response> {
 			return getResponse(ResponseType.SPIN_OUT);
 		}
 
-		return getResponse(ResponseType.SUCCESS);
+		return getResponse(ResponseType.BALANCE);
 	} catch (error) {
 		console.error(error);
 		return getResponse(ResponseType.ERROR);

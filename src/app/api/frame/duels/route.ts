@@ -51,8 +51,8 @@ enum ResponseType {
 
 function getResponse(type: ResponseType) {
 	const IMAGE = {
-		[ResponseType.CHOICE]: 'status/choice.png',
-		[ResponseType.ERROR]: 'status/error.png',
+		[ResponseType.CHOICE]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/Choose-opponent.gif',
+		[ResponseType.ERROR]: 'https://gateway.lighthouse.storage/ipfs/bafybeiborpipie6brxzofzgaf5eswp53pctxhu335etzbjyvax46pfvpwa/error.jpg',
 		[ResponseType.SPIN_OUT]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/Balance-not-enough.png'
 	}[type];
 	const shouldRetry =

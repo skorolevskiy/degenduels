@@ -1,11 +1,6 @@
 import { SITE_URL, NEYNAR_API_KEY } from '@/config';
-//import { kv } from '@vercel/kv';
 import { NextRequest, NextResponse } from 'next/server';
-import {
-	Address
-} from 'viem';
-
-let fid: number, points: number, spins: number, dateString: string, refFid: string, refCount: number;
+import { Address } from 'viem';
 import { addUser, getUser } from './types'
 
 export const dynamic = 'force-dynamic';
