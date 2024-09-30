@@ -2,7 +2,7 @@ import { SITE_URL } from '@/config';
 import { ImageResponse } from 'next/og';
 import { getUser } from '../../types';
 
-let fid: number | null, username: string, points: number | null, wins: number, loses: number;
+let fid: number | null, username: string, points: number | null, wins: number, loses: number, winRate: number;
 
 export async function GET(request: Request) {
 	const fontData = await fetch(
@@ -26,6 +26,8 @@ export async function GET(request: Request) {
 			loses = User.totalLose;
 		}
 
+		winRate = Math.floor((wins/(wins+loses))*100);
+
 		return new ImageResponse(
 			(
 				<div
@@ -36,7 +38,7 @@ export async function GET(request: Request) {
 						background: '#f3cd08',
 						width: '100%',
 						height: '100%',
-						padding: '30px 40px',
+						padding: '30px 80px',
 						display: 'flex',
 						justifyContent: 'space-around',
 						alignItems: 'center',
@@ -55,7 +57,7 @@ export async function GET(request: Request) {
 					<span>Balance: {points} $DUEL </span>
 					<span>Wins: {wins} </span>
 					<span>Loses: {loses} </span>
-					<span>Win Rate: {wins/loses} </span>
+					<span>Win Rate: {winRate}% </span>
 				</div>
 
 				<div
