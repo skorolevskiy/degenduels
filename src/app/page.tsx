@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: 'DegenDuels Game',
     other: FRAME_METADATA,
     openGraph: {
-        images: '/opengraph-image.png',
+        images: '/opengraph-image2.png',
     },
     
 };
