@@ -55,13 +55,9 @@ function getResponse(type: ResponseType) {
 		`
 		: 
 		`
-    	<meta name="fc:frame:button:1" content="${buttonText}" />
+    	<meta name="fc:frame:button:1" content="View results" />
 		<meta name="fc:frame:button:1:action" content="post" />
 		<meta name="fc:frame:button:1:target" content="${SITE_URL}/api/frame/duels/${choice}" />
-
-		<meta name="fc:frame:button:2" content="Skip" />
-		<meta name="fc:frame:button:2:action" content="post" />
-		<meta name="fc:frame:button:2:target" content="${SITE_URL}/api/frame/duels/" />
 		`
 	}
 
