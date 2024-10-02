@@ -55,15 +55,15 @@ function getResponse(type: ResponseType) {
 	
 	<meta name="fc:frame:button:1" content="Water" />
 	<meta name="fc:frame:button:1:action" content="post" />
-	<meta name="fc:frame:button:1:target" content="${SITE_URL}/api/frame/waiting/water" />
+	<meta name="fc:frame:button:1:target" content="${SITE_URL}/api/frame/duels/waiting/water" />
 
 	<meta name="fc:frame:button:2" content="Wind" />
 	<meta name="fc:frame:button:2:action" content="post" />
-	<meta name="fc:frame:button:2:target" content="${SITE_URL}/api/frame/waiting/wind" />
+	<meta name="fc:frame:button:2:target" content="${SITE_URL}/api/frame/duels/waiting/wind" />
 
 	<meta name="fc:frame:button:3" content="Fire" />
 	<meta name="fc:frame:button:3:action" content="post" />
-	<meta name="fc:frame:button:3:target" content="${SITE_URL}/api/frame/waiting/fire" />		
+	<meta name="fc:frame:button:3:target" content="${SITE_URL}/api/frame/duels/waiting/fire" />		
 
   </head></html>`);
 }
