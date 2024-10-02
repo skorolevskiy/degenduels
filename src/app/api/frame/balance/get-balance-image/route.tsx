@@ -63,7 +63,7 @@ export async function GET(request: Request) {
 				<div
 					style={{
 						display: 'flex',
-						fontSize: 32,
+						fontSize: 42,
 						textAlign: 'center',
 					}}
 				>
