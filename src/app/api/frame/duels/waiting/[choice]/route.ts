@@ -1,9 +1,9 @@
 import { SITE_URL, NEYNAR_API_KEY } from '@/config';
 import { NextRequest, NextResponse } from 'next/server';
-import { updateFriend, getUser } from '../../types';
+import { updateDuel, getUser } from '../../../types';
 
 export const dynamic = 'force-dynamic';
-let fid: number, date: string, points: number, inputText: string | undefined;
+let spins: number, date: string, points: number, buttonText: string, inputText: string | undefined, choice: string | undefined;
 
 export async function POST(req: NextRequest): Promise<Response> {
 	try {
@@ -18,18 +18,10 @@ export async function POST(req: NextRequest): Promise<Response> {
 			throw new Error('Invalid frame request');
 		}
 
-		const inputData: { untrustedData?: { inputText?: string } } = data;
-		inputText = inputData.untrustedData?.inputText ? inputData.untrustedData?.inputText : 'random';
-
-		fid = status?.action?.interactor?.fid ? status.action.interactor.fid : 1;
-
-		if (inputText === "") {
-			return getResponse(ResponseType.ERROR);
-		} else {
-			await updateFriend(fid, inputText);
-		}
+		choice = req.nextUrl.pathname.split('/').pop();
 
 		return getResponse(ResponseType.SUCCESS);
+
 	} catch (error) {
 		console.error(error);
 		return getResponse(ResponseType.ERROR);
@@ -43,27 +35,35 @@ enum ResponseType {
 
 function getResponse(type: ResponseType) {
 	const IMAGE = {
-		[ResponseType.SUCCESS]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/Choose.gif',
-		[ResponseType.ERROR]: 'https://gateway.lighthouse.storage/ipfs/QmNY7ESQtnHdFre4NAxH869MWL536mng8yhtMvRomsikfa/ERROR.png',
+		[ResponseType.SUCCESS]: 'https://gateway.lighthouse.storage/ipfs/bafybeibgat6ad7impnsq233vlfovyhnaelgjyemi27h3wqnu5xkzmi2zsy/generating-results.png',
+		[ResponseType.ERROR]: 'https://gateway.lighthouse.storage/ipfs/bafybeiborpipie6brxzofzgaf5eswp53pctxhu335etzbjyvax46pfvpwa/error.jpg'
 	}[type];
+	const shouldRetry =
+	  type === ResponseType.ERROR;
 	
 	return new NextResponse(`<!DOCTYPE html><html><head>
     <meta property="fc:frame" content="vNext" />
     <meta property="fc:frame:image" content="${IMAGE}" />
-	<meta property="fc:frame:image:aspect_ratio" content="1:1" />
+    <meta property="fc:frame:image:aspect_ratio" content="1:1" />
     <meta property="fc:frame:post_url" content="${SITE_URL}/api/frame" />
-	
-	<meta name="fc:frame:button:1" content="Water" />
-	<meta name="fc:frame:button:1:action" content="post" />
-	<meta name="fc:frame:button:1:target" content="${SITE_URL}/api/frame/waiting/water" />
 
-	<meta name="fc:frame:button:2" content="Wind" />
-	<meta name="fc:frame:button:2:action" content="post" />
-	<meta name="fc:frame:button:2:target" content="${SITE_URL}/api/frame/waiting/wind" />
+	${shouldRetry
+		? `
+		<meta name="fc:frame:button:1" content="Back" />
+		<meta name="fc:frame:button:1:action" content="post" />
+		<meta name="fc:frame:button:1:target" content="${SITE_URL}/api/frame/duels/" />
+		`
+		: 
+		`
+    	<meta name="fc:frame:button:1" content="${buttonText}" />
+		<meta name="fc:frame:button:1:action" content="post" />
+		<meta name="fc:frame:button:1:target" content="${SITE_URL}/api/frame/duels/${choice}" />
 
-	<meta name="fc:frame:button:3" content="Fire" />
-	<meta name="fc:frame:button:3:action" content="post" />
-	<meta name="fc:frame:button:3:target" content="${SITE_URL}/api/frame/waiting/fire" />		
+		<meta name="fc:frame:button:2" content="Skip" />
+		<meta name="fc:frame:button:2:action" content="post" />
+		<meta name="fc:frame:button:2:target" content="${SITE_URL}/api/frame/duels/" />
+		`
+	}
 
   </head></html>`);
 }
