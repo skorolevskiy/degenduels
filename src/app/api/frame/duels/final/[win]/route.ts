@@ -60,8 +60,8 @@ enum ResponseType {
 function getResponse(type: ResponseType) {
 	const IMAGE = {
 		[ResponseType.SUCCESS]: 'https://gateway.lighthouse.storage/ipfs/QmNY7ESQtnHdFre4NAxH869MWL536mng8yhtMvRomsikfa/GREERING%20RAZ%201.png',
-		[ResponseType.REMATCH]: 'https://gateway.lighthouse.storage/ipfs/bafybeibgat6ad7impnsq233vlfovyhnaelgjyemi27h3wqnu5xkzmi2zsy/make-cast-lose.png',
-		[ResponseType.RECEIVE]: 'https://gateway.lighthouse.storage/ipfs/bafybeibgat6ad7impnsq233vlfovyhnaelgjyemi27h3wqnu5xkzmi2zsy/make-cast-win.png',
+		[ResponseType.REMATCH]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/rematch.gif',
+		[ResponseType.RECEIVE]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/received.gif',
 		[ResponseType.ERROR]: 'https://gateway.lighthouse.storage/ipfs/bafybeiborpipie6brxzofzgaf5eswp53pctxhu335etzbjyvax46pfvpwa/error.jpg',
 		[ResponseType.SPIN_OUT]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/Balance-not-enough.png'
 	}[type];
@@ -82,9 +82,9 @@ function getResponse(type: ResponseType) {
 		`
 		: 
 		`
-    	<meta name="fc:frame:button:1" content="Check" />
+    	<meta name="fc:frame:button:1" content="${buttonText}" />
 		<meta name="fc:frame:button:1:action" content="post" />
-		<meta name="fc:frame:button:1:target" content="${SITE_URL}/api/frame/final/${getParam}" />
+		<meta name="fc:frame:button:1:target" content="${SITE_URL}/api/frame/duels/" />
 
 		<meta name="fc:frame:button:2" content="Make cast" />
 		<meta name="fc:frame:button:2:action" content="link" />
