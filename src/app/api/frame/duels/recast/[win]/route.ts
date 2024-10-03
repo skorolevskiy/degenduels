@@ -30,7 +30,7 @@ export async function POST(req: NextRequest): Promise<Response> {
 				user = "eat";
 			}
 		}
-		let text = "I%20fight%20with%20you%20%40" + user + "%20in%20%2Fdegenduels%20game.%0ABack%20to%20game%20to%20end%20fight.";
+		let text = "I%20just%20won%20a%20duel%20in%20Degen%20Duels%20and%20earned%20100%20%24duels%21%20%E2%9A%94%EF%B8%8F%0ABetter%20luck%20next%20time%2C%20%40" + user + "%21%0A%0ALost%20the%20battle%20but%20not%20the%20war%21%20Great%20duel%2C%20%40" + user + ".%20Let%E2%80%99s%20go%20rematch%21%20%E2%9A%94%EF%B8%8F";
   		recast = "https://warpcast.com/~/compose?text=" + text + "&embeds[]=" + SITE_URL + "/";
 
 		await updatePoints(fid, 100);
@@ -61,7 +61,7 @@ function getResponse(type: ResponseType) {
 	const IMAGE = {
 		[ResponseType.SUCCESS]: 'https://gateway.lighthouse.storage/ipfs/QmNY7ESQtnHdFre4NAxH869MWL536mng8yhtMvRomsikfa/GREERING%20RAZ%201.png',
 		[ResponseType.REMATCH]: 'https://gateway.lighthouse.storage/ipfs/bafybeibgat6ad7impnsq233vlfovyhnaelgjyemi27h3wqnu5xkzmi2zsy/make-cast-lose.png',
-		[ResponseType.RECEIVE]: 'https://gateway.lighthouse.storage/ipfs/bafybeibgat6ad7impnsq233vlfovyhnaelgjyemi27h3wqnu5xkzmi2zsy/make-cast-win.png',
+		[ResponseType.RECEIVE]: 'https://gateway.lighthouse.storage/ipfs/bafkreihlgqnj23qo64fgni2z4owim664pbqetoi6fp33ifssyms7cesxy4',
 		[ResponseType.ERROR]: 'https://gateway.lighthouse.storage/ipfs/bafybeiborpipie6brxzofzgaf5eswp53pctxhu335etzbjyvax46pfvpwa/error.jpg',
 		[ResponseType.SPIN_OUT]: 'https://gateway.lighthouse.storage/ipfs/bafybeidot3ebld6cylwsb6h2elpwzskpe77oduqau6dx7zxxmi35zhbc7a/Balance-not-enough.png'
 	}[type];
