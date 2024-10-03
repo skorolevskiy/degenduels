@@ -50,7 +50,7 @@ export async function GET(request: Request) {
 					style={{
 						display: 'flex',
 						flexDirection: 'column',
-						fontSize: 48,
+						fontSize: 54,
 						textAlign: 'center',
 					}}
 				>

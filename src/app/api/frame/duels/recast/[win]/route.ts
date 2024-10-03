@@ -33,8 +33,6 @@ export async function POST(req: NextRequest): Promise<Response> {
 		let text = "I%20just%20won%20a%20duel%20in%20Degen%20Duels%20and%20earned%20100%20%24duels%21%20%E2%9A%94%EF%B8%8F%0ABetter%20luck%20next%20time%2C%20%40" + user + "%21%0A%0ALost%20the%20battle%20but%20not%20the%20war%21%20Great%20duel%2C%20%40" + user + ".%20Let%E2%80%99s%20go%20rematch%21%20%E2%9A%94%EF%B8%8F";
   		recast = "https://warpcast.com/~/compose?text=" + text + "&embeds[]=" + SITE_URL + "/";
 
-		await updatePoints(fid, 100);
-
 		if (getParam == "win") {
 			buttonText = "Fight again";
 			return getResponse(ResponseType.RECEIVE);
