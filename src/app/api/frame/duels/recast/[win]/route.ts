@@ -87,6 +87,10 @@ function getResponse(type: ResponseType) {
 		<meta name="fc:frame:button:2" content="Make cast" />
 		<meta name="fc:frame:button:2:action" content="link" />
 		<meta name="fc:frame:button:2:target" content="${recast}" />
+
+		<meta name="fc:frame:button:1" content="Skip" />
+		<meta name="fc:frame:button:1:action" content="post" />
+		<meta name="fc:frame:button:1:target" content="${SITE_URL}/api/frame/duels/" />
 		`
 	}
 
